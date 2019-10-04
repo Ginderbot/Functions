@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project1", "Project1\Project1.vcxproj", "{CD3A9598-17D5-4B8E-AA8C-0CFBC52ACBC1}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Recursion", "Recursion\Recursion.vcxproj", "{BF5085BD-BE04-4D9C-B438-CF1A495493BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{CD3A9598-17D5-4B8E-AA8C-0CFBC52ACBC1}.Release|x64.Build.0 = Release|x64
 		{CD3A9598-17D5-4B8E-AA8C-0CFBC52ACBC1}.Release|x86.ActiveCfg = Release|Win32
 		{CD3A9598-17D5-4B8E-AA8C-0CFBC52ACBC1}.Release|x86.Build.0 = Release|Win32
+		{BF5085BD-BE04-4D9C-B438-CF1A495493BD}.Debug|x64.ActiveCfg = Debug|x64
+		{BF5085BD-BE04-4D9C-B438-CF1A495493BD}.Debug|x64.Build.0 = Debug|x64
+		{BF5085BD-BE04-4D9C-B438-CF1A495493BD}.Debug|x86.ActiveCfg = Debug|Win32
+		{BF5085BD-BE04-4D9C-B438-CF1A495493BD}.Debug|x86.Build.0 = Debug|Win32
+		{BF5085BD-BE04-4D9C-B438-CF1A495493BD}.Release|x64.ActiveCfg = Release|x64
+		{BF5085BD-BE04-4D9C-B438-CF1A495493BD}.Release|x64.Build.0 = Release|x64
+		{BF5085BD-BE04-4D9C-B438-CF1A495493BD}.Release|x86.ActiveCfg = Release|Win32
+		{BF5085BD-BE04-4D9C-B438-CF1A495493BD}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
