@@ -37,3 +37,10 @@ int main()
 	cout << endl;
 #endif // DECLARATION_OF_POINTER
 }
+
+/*
+type function(parametr1, parametr2, ...)
+{
+
+}
+*/
