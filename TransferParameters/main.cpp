@@ -13,7 +13,7 @@ void main()
 }
 void Exchange(int* a, int* b)
 {
-	int buffer = *a;
-	*a = *b;
-	*b = buffer;
+	*a = *a + *b; // 2+3=5
+	*b = *a - *b; // 5-3=2
+	*a = *a - *b; // 5-2=3
 }
