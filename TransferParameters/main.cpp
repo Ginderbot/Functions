@@ -12,13 +12,13 @@ void Xor(T*a, T*b);
 
 #ifdef BY_REFERENSE
 template<typename T>
-void Xor(int &a, int&b);
+void Xor(double &a, double&b);
 #endif // BY_REFERENSE
 
 
 void main()
 {
-	int a = 2.5, b = 3.14;
+	double a = 2.5, b = 3.14;
 	cout << a << "\t" << b << endl;
 #ifdef BY_POINTER
 	//Exchange(&a, &b);
@@ -26,7 +26,7 @@ void main()
 	cout << a << "\t" << b << endl;
 #endif // BY_POINTER
 
-	Xor<int>(a, b);
+	Xor<double>(a, b);
 	cout << a << "\t" << b << endl;
 }
 #ifdef BY_POINTER
@@ -40,7 +40,7 @@ void Exchange(int* a, int* b)
 }
 #endif // BY_POINTER
 template<typename T>
-void Xor(int&a, int&b)
+void Xor(double&a, double&b)
 {
 	a ^= b;
 	b ^= a;
