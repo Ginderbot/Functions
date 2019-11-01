@@ -17,5 +17,7 @@ void main()
 	}
 	cout << endl;
 
+
 	delete[] Arr;
+
 }
