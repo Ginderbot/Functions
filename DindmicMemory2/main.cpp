@@ -1,9 +1,18 @@
 #include<iostream>
-using namespace std;
+using std::cin;
+using std::cout;
+using std::endl;
+//#define DINAMIC_MEMORY_1
+
+void FillRand(int**arr, const int n, const int m);
 
 void Print(int arr[], const int n);
+void Print(int**arr, const int n, const int m);
+
 int* push_back(int arr[], int &n, int value);
 int* push_front(int arr[], int &n, int value);
+int **push_row_back(int **arr, int &m, const int n);
+
 int* insert(int arr[], int &n, int value, int index);
 int* pop_front(int arr[], int &n);
 int* pop_back(int arr[], int &n);
@@ -12,7 +21,11 @@ int*erase(int arr[], int &n, int index);
 void main()
 {
 	setlocale(LC_ALL, "");
+#ifdef DINAMIC_MEMORY_1
+
+
 	int n;//размер массива
+
 	cout << "Введите размер массива: "; cin >> n;
 	int *arr = new int[n];
 
@@ -36,7 +49,7 @@ void main()
 	//}
 	//else if (chouse == 3)
 	//{
-		int index;
+	int index;
 	cout << "Введите количество отступа: "; cin >> index;
 	//	cout << endl;
 	//	arr = insert(arr, n, value, index);
@@ -50,16 +63,66 @@ void main()
 	arr = pop_back(arr, n);
 	Print(arr, n);
 	arr = erase(arr, n, index);
-		Print(arr, n);
+	Print(arr, n);
 
 	delete[] arr;
+#endif // DINAMIC_MEMORY_1
+
+	int m;//количество строк
+	int n;//Количество елементов в строке
+	cout << "Введите количество строк: "; cin >> m;
+	cout << "Введите количество улументов строки: "; cin >> n;
+	// обьявление динамического массива
+	int **arr = new int*[m];
+	for (int i = 0; i < m; i++)
+	{
+		arr[i] = new int[n] {};
+	}
+	///////////////////////////////////////////////////////
+		// использование двумерного динамического массива
+	FillRand(arr, m, n);
+	Print(arr, m, n);
+	arr = push_row_back(arr, m, n);
+	Print(arr, m, n);
+	//////////////////////////////////////////////////////
+	// удаление двумерного динамического массива
+	for (int i = 0; i < m; i++)
+	{
+		delete[] arr[i];
+	}
+	delete[] arr;
+
 }
+void FillRand(int**arr, const int n, const int m)
+{
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			arr[i][j] = rand() % 100;
+		}
+	}
+}
+
 
 void Print(int arr[], const int n)
 {
 	for (int i = 0; i < n; i++)
 	{
 		cout << arr[i] << "\t";
+	}
+	cout << endl;
+}
+
+void Print(int**arr, const int n, const int m)
+{
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			cout << arr[i][j] << "\t";
+		}
+		cout << endl;
 	}
 	cout << endl;
 }
@@ -92,8 +155,35 @@ int* push_front(int arr[], int &n, int value)
 	return arr;
 }
 
+int **push_row_back(int **arr, int &m, const int n)
+{
+	int** buf = new int*[m + 1]{};
+	for (int i = 0; i < m; i++)
+	{
+		buf[i] = new int[n] {};
+
+	}
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			buf[i][j] = arr[i][j];
+		}
+	}
+	for (int i = 0; i < m; i++)
+	{
+		delete[] arr[i];
+	}
+	delete[] arr;
+	arr = buf;
+	arr[m] = new int [n] {};
+	m++;
+	return arr;
+}
+
 int* insert(int arr[], int &n, int value, int index)
 {
+	if (index > n)return arr;
 	int*buffer = new int[n + 1];
 	for (int i = 0; i < index; i++)
 	{
@@ -135,14 +225,15 @@ int* pop_back(int arr[], int &n)
 
 int*erase(int arr[], int &n, int index)
 {
+	if (index > n)return arr;
 	int*buffer = new int[n - 1];
 	for (int i = 0; i < index; i++)
 	{
 		buffer[i] = arr[i];
 	}
-	for (int i = index; i < n; i++)
+	for (int i = index - 1; i < n; i++)
 	{
-		buffer[i] = arr[i+1];
+		buffer[i] = arr[i + 1];
 	}
 	arr = buffer;
 	n--;
