@@ -93,7 +93,7 @@ void main()
 	delete[] arr;
 
 }
-void FillRand(int**arr, const int n, const int m)
+void FillRand(int**arr, const int m, const int n)
 {
 	for (int i = 0; i < m; i++)
 	{
@@ -114,7 +114,7 @@ void Print(int arr[], const int n)
 	cout << endl;
 }
 
-void Print(int**arr, const int n, const int m)
+void Print(int**arr, const int m, const int n)
 {
 	for (int i = 0; i < m; i++)
 	{
