@@ -12,6 +12,8 @@ void Print(int**arr, const int n, const int m);
 int* push_back(int arr[], int &n, int value);
 int* push_front(int arr[], int &n, int value);
 int **push_row_back(int **arr, int &m, const int n);
+int **push_row_front(int **arr, int &m, const int n);
+int **pop_row_back(int **arr, int  const m, int& n);
 
 int* insert(int arr[], int &n, int value, int index);
 int* pop_front(int arr[], int &n);
@@ -78,12 +80,19 @@ void main()
 	{
 		arr[i] = new int[n] {};
 	}
+	cout << "memory allocated" << endl;
+	cout << "Filling array" << endl;
 	///////////////////////////////////////////////////////
 		// использование двумерного динамического массива
 	FillRand(arr, m, n);
 	Print(arr, m, n);
 	arr = push_row_back(arr, m, n);
 	Print(arr, m, n);
+	arr = push_row_front(arr, m, n);
+	Print(arr, m, n);
+	arr = pop_row_back(arr, m, n);
+	Print(arr, m, n);
+	cout << "Row addet" << endl;
 	//////////////////////////////////////////////////////
 	// удаление двумерного динамического массива
 	for (int i = 0; i < m; i++)
@@ -157,7 +166,7 @@ int* push_front(int arr[], int &n, int value)
 
 int **push_row_back(int **arr, int &m, const int n)
 {
-	int** buf = new int*[m + 1]{};
+	/*int** buf = new int*[m + 1]{};
 	for (int i = 0; i < m; i++)
 	{
 		buf[i] = new int[n] {};
@@ -178,8 +187,40 @@ int **push_row_back(int **arr, int &m, const int n)
 	arr = buf;
 	arr[m] = new int [n] {};
 	m++;
+	return arr;*/
+	// создаем буферный массив
+	int** buffer = new int*[m + 1];
+	// копируем 
+	for (int i = 0; i < m; i++) buffer[i] = arr[i];
+	delete[]arr;
+	arr = buffer;
+	arr[m] = new int[n] {};
+	m++;
 	return arr;
 }
+
+int **push_row_front(int **arr, int &m, const int n)
+{
+	int** buffer = new int*[m + 1];
+	for (int i = 0; i < m; i++)buffer[i + 1] = arr[i];
+	delete[] arr;
+	arr = buffer;
+	arr[0] = new int [n] {};
+	m++;
+	return arr;
+}
+
+int **pop_row_back(int **arr, int  const m, int& n)
+{
+	int** buf = new int*[n + 1]{};
+	for (int i = 0; i < n; i++)buf[i] = arr[i];
+	delete[] arr;
+	arr = buf;
+	arr[n] = new int [m] {};
+	n++;
+	return arr;
+}
+
 
 int* insert(int arr[], int &n, int value, int index)
 {
@@ -239,4 +280,3 @@ int*erase(int arr[], int &n, int index)
 	n--;
 	return arr;
 }
-
