@@ -81,7 +81,7 @@ void main()
 	///////////////////////////////////////////////////////
 	// использование двумерного динамического массива
 	FillRand(arr, m, n);
-	/*Print(arr, m, n);
+	Print(arr, m, n);
 	arr = push_row_back(arr, m, n);
 	Print(arr, m, n);
 	arr = push_row_front(arr, m, n);
@@ -98,7 +98,6 @@ void main()
 	cout << "Какую строку Вы хотите удалить? ";
 	cin >> index; cout << endl;
 	arr =erase_row(arr, m, n, index);
-	*/
 	Print(arr, m, n);
 	push_col_back(arr, m, n);
 	Print(arr, m, n);
