@@ -95,7 +95,7 @@ void main()
 	cout << "Row addet" << endl;
 	cout << "Какую строку Вы хотите удалить? ";
 	cin >> index; cout << endl;
-	erase_row(arr, m, n, index);
+	arr =erase_row(arr, m, n, index);
 	Print(arr, m, n);
 	//////////////////////////////////////////////////////
 	// удаление двумерного динамического массива
@@ -204,20 +204,18 @@ int **push_row_front(int **arr, int &m, const int n)
 }
 int **pop_row_back(int **arr, int &m, const int n)
 {
-	int** buffer = new int*[m + 1];
+	int** buffer = new int*[--m];
 	for (int i = 0; i < m; i++) buffer[i] = arr[i];
 	delete[]arr;
 	arr = buffer;
-	m--;
 	return arr;
 }
 int **pop_row_front(int **arr, int &m, const int n)
 {
-	int** buffer = new int*[m - 1];
+	int** buffer = new int*[--m];
 	for (int i = 0; i < m; i++)buffer[i] = arr[i + 1];
 	delete[] arr;
 	arr = buffer;
-	m--;
 	return arr;
 }
 int **insert_row(int **arr, int &m, const int n, int index)
