@@ -222,10 +222,9 @@ int **insert_row(int **arr, int &m, const int n, int index)
 {
 	if (index > m)return arr;
 	int**buffer = new int*[m + 1]{};
-	for (int i = 0; i < index; i++)buffer[i] = arr[i];
-	for (int i = index; i < m; i++)
+	for (int i = 0; i < m+1; i++)
 	{
-		buffer[i+1] = arr[i];
+		i < index ? buffer[i] = arr[i] : buffer[i + 1] = arr[i];
 	}
 	delete[]arr;
 	arr = buffer;
@@ -239,14 +238,7 @@ int **erase_row(int **arr, int &m, const int n, int index)
 	int**buffer = new int*[m - 1];
 	for (int i = 0; i < m-1; i++)
 	{
-		if (i<index)
-		{
-			buffer[i] = arr[i];
-		}
-		else
-		{
-			buffer[i] = arr[i + 1];
-		}
+		i<index?buffer[i] = arr[i]:buffer[i] = arr[i + 1];
 	}
 	delete[]arr;
 	arr = buffer;
