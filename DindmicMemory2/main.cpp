@@ -7,10 +7,8 @@ using std::endl;
 
 //#define DINAMIC_MEMORY_1
 #define DINAMIC_MEMORY_2
-template <typename T>
-T** allocate(const T m, const T n);
-template <typename T>
-void clear(T** arr, const T n);
+int** allocate(const int m, const int n);
+void clear(int** arr, const int n);
 
 void FillRand(int**arr, const int n, const int m);
 void Print(int arr[], const int n);
@@ -119,8 +117,8 @@ void main()
 	clear(arr, m);
 #endif // DINAMIC_MEMORY_2
 }
-template <typename T>
-T** allocate(const T m, const T n)
+
+int** allocate(const int m, const int n)
 {
 	int **arr = new int*[m];
 	for (int i = 0; i < m; i++)
@@ -129,8 +127,8 @@ T** allocate(const T m, const T n)
 	}
 	return arr;
 }
-template <typename T>
-void clear(T** arr, const T m)
+
+void clear(int** arr, const int m)
 {
 	for (int i = 0; i < m; i++)
 	{
