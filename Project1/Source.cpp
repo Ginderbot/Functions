@@ -127,7 +127,7 @@ T** allocate(const int m, const int n)
 	T **arr = new T*[m];
 	for (int i = 0; i < m; i++)
 	{
-		arr[i] = new T[n] {};
+		arr[i] = new T[n]{};
 	}
 	return arr;
 }
@@ -229,7 +229,7 @@ T **push_row_back(T **arr, int &m, const int n)
 	for (int i = 0; i < m; i++) buffer[i] = arr[i];
 	delete[]arr;
 	arr = buffer;
-	arr[m] = new T[n] {};
+	arr[m] = new T[n]{};
 	m++;
 	return arr;
 }
@@ -255,7 +255,7 @@ T **push_row_front(T **arr, int &m, const int n)
 	for (int i = 0; i < m; i++)buffer[i + 1] = arr[i];
 	delete[] arr;
 	arr = buffer;
-	arr[0] = new T [n] {};
+	arr[0] = new T[n]{};
 	m++;
 	return arr;
 }
@@ -288,7 +288,7 @@ void pop_col_back(T **arr, int const m, int &n)
 {
 	for (int i = 0; i < m; i++)
 	{
-		T* buffer = new T[n] {};
+		T* buffer = new T[n]{};
 		for (int j = 0; j < n; j++)
 		{
 			buffer[j] = arr[i][j];
@@ -312,7 +312,7 @@ void pop_col_front(T **arr, int const m, int &n)
 {
 	for (int i = 0; i < m; i++)
 	{
-		T* buffer = new T[n] {};
+		T* buffer = new T[n]{};
 		for (int j = 0; j < n; j++)
 		{
 			buffer[j] = arr[i][j + 1];
@@ -333,7 +333,7 @@ T **insert_row(T **arr, int &m, const int n, int index)
 	}
 	delete[]arr;
 	arr = buffer;
-	arr[index] = new T [n] {};
+	arr[index] = new T[n]{};
 	m++;
 	return arr;
 }
@@ -406,7 +406,7 @@ T*erase(T arr[], int &n, int index)
 	{
 		buffer[i] = arr[i + 1];
 	}
-	arr = buffer; 
+	arr = buffer;
 	n--;
 	return arr;
 }
