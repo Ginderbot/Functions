@@ -1,116 +1,151 @@
-#include <iostream>
-using namespace std;
+#include<iostream>
+using std::cin;
+using std::cout;
+using std::endl;
 
-#define DELIMETER "\n______________________________________________________________________________________\n"
 
-const int ROWS = 4; // количество строк
-const int COLS = 5; // количество елементов
 
-void FillRand(int arr[], const int n);
-void FillRand(double arr[], const int n);
-void FillRand(float arr[], const int n);
-void FillRand(char arr[], const int n);
-void FillRand(int arr[ROWS][COLS], const int ROWS, const int COLS);
+//#define DINAMIC_MEMORY_1
+#define DINAMIC_MEMORY_2
+template <typename T>
+T** allocate(const T m, const T n);
+template <typename T>
+void clear(T** arr, const T n);
 
+void FillRand(int**arr, const int n, const int m);
 void Print(int arr[], const int n);
-void Print(double arr[], const int n);
-void Print(float arr[], const int n);
-void Print(char arr[], const int n);
-void Print(int arr[ROWS][COLS], const int ROWS, const int COLS);
-
-void Sort(int arr[], const int n);
-void Sort(int arr[ROWS][COLS], const int ROWS, const int COLS);
-int Sum(int arr[], const int n);
-int Sum(int arr[ROWS][COLS], const int ROWS, const int COLS);
-double Avg(int arr[], const int n);
-double Avg(int arr[ROWS][COLS], const int ROWS, const int COLS);
-
-int minValueIn(int arr[], const int n);
-int minValueIn(int arr[ROWS][COLS], const int ROWS, const int COLS);
-int maxValueIn(int arr[], const int n);
-int maxValueIn(int arr[ROWS][COLS], const int ROWS, const int COLS);
-
-
+void Print(int**arr, const int n, const int m);
+int* push_back(int arr[], int &n, int value);
+int* push_front(int arr[], int &n, int value);
+int **push_row_back(int **arr, int &m, const int n);
+void push_col_back(int **arr, int const m, int &n);
+int **push_row_front(int **arr, int &m, const int n);
+void push_col_front(int **arr, int const m, int &n);
+int **pop_row_back(int **arr, int &m, const int n);
+void pop_col_back(int **arr, int const m, int &n);
+int **pop_row_front(int **arr, int &m, const int n);
+void pop_col_front(int **arr, int const m, int &n);
+int **insert_row(int **arr, int &m, const int n, int index);
+int **erase_row(int **arr, int &m, const int n, int index);
+int* insert(int arr[], int &n, int value, int index);
+int* pop_front(int arr[], int &n);
+int* pop_back(int arr[], int &n);
+int* erase(int arr[], int &n, int index);
 void main()
 {
 	setlocale(LC_ALL, "");
-	const int n = 5;
-	int arr[n];
-
-	FillRand(arr, n);
-	Print(arr, n);
-	Sort(arr, n);
-	Print(arr, n);
-	cout << "Cумма елементов: " << Sum(arr, n) << endl;
-	cout << "Cреднее значение: " << Avg(arr, n) << endl;
-	cout << "Минимальное значение: " << minValueIn(arr, n) << endl;
-	cout << "Максимальное значение: " << maxValueIn(arr, n) << endl;
-
-	double brr[n];
-	FillRand(brr, n);
-	Print(brr, n);
-
-	float crr[n];
-	FillRand(crr, n);
-	Print(crr, n);
-
-	char drr[n];
-	FillRand(drr, n);
-	Print(drr, n);
-
-	int irr[ROWS][COLS];
-	FillRand(irr, ROWS, COLS);
-	Print(irr, ROWS, COLS);
-	Sort(irr, ROWS, COLS);
-	cout << DELIMETER;
-	Print(irr, ROWS, COLS);
-
-
-	cout << "Cумма елементов: " << Sum(irr, ROWS, COLS) << endl;
-	cout << "Cреднее значение: " << Avg(irr, ROWS, COLS) << endl;
-	cout << "Минимальное значение: " << minValueIn(irr, ROWS, COLS) << endl;
-	cout << "Максимальное значение: " << maxValueIn(irr, ROWS, COLS) << endl;
-}
-void FillRand(int arr[], const int n)
-{
+#ifdef DINAMIC_MEMORY_1
+	int n;//размер массива
+	cout << "Введите размер массива: "; cin >> n;
+	int *arr = new int[n];
 	for (int i = 0; i < n; i++)
 	{
-		arr[i] = rand() % 100;
+		cout << (arr[i] = rand() % 100) << "\t";
 	}
+	cout << endl;
+	int value, chouse;
+	/*cout << "1. Добавить значение в начале массива " << endl << "2. Добавить
+	значение в конце массива " << "3. Добавить значение в середину массива" << endl;
+	cin >> chouse;*/
+	//cout << "Введите добавляемое значение: "; cin >> value;
+	//if (chouse == 1)
+	//{
+	// arr = push_front(arr, n, value);
+	//}
+	//else if (chouse == 2)
+	//{
+	// arr = push_back(arr, n, value);
+	//}
+	//else if (chouse == 3)
+	//{
+	int index;
+	cout << "Введите количество отступа: "; cin >> index;
+	// cout << endl;
+	// arr = insert(arr, n, value, index);
+	//}
+	//else
+	//{
+	// cout << "Недопустимый выбор" << endl;
+	//}
+	arr = pop_front(arr, n);
+	Print(arr, n);
+	arr = pop_back(arr, n);
+	Print(arr, n);
+	arr = erase(arr, n, index);
+	Print(arr, n);
+	delete[] arr;
+#endif // DINAMIC_MEMORY_1
+#ifdef DINAMIC_MEMORY_2
+	int m;//количество строк
+	int n;//Количество елементов в строке
+	cout << "Введите количество строк: "; cin >> m;
+	cout << "Введите количество улументов строки: "; cin >> n;
+	// обьявление динамического массива
+	int **arr = allocate(m, n);
+	cout << "memory allocated" << endl;
+	cout << "Filling array" << endl;
+	///////////////////////////////////////////////////////
+	// использование двумерного динамического массива
+	FillRand(arr, m, n);
+	Print(arr, m, n);
+	/*
+	arr = push_row_back(arr, m, n);
+	Print(arr, m, n);
+	arr = push_row_front(arr, m, n);
+	Print(arr, m, n);
+	arr = pop_row_back(arr, m, n);
+	Print(arr, m, n);
+	arr = pop_row_front(arr, m, n);
+	Print(arr, m, n);
+	cout << "В какую строку Вы хотите вставить новую? "; int index;
+	cin >> index; cout << endl;
+	arr = insert_row(arr, m, n, index);
+	Print(arr, m, n);
+	cout << "Row addet" << endl;
+	cout << "Какую строку Вы хотите удалить? ";
+	cin >> index; cout << endl;
+	arr = erase_row(arr, m, n, index);
+	Print(arr, m, n);*/
+	push_col_back(arr, m, n);
+	Print(arr, m, n);
+	push_col_front(arr, m, n);
+	Print(arr, m, n);
+	pop_col_back(arr, m, n);
+	Print(arr, m, n);
+	pop_col_front(arr, m, n);
+	Print(arr, m, n);
+	//////////////////////////////////////////////////////
+	// удаление двумерного динамического массива
+	clear(arr, m);
+#endif // DINAMIC_MEMORY_2
 }
-void FillRand(double arr[], const int n)
+template <typename T>
+T** allocate(const T m, const T n)
 {
-	for (int i = 0; i < n; i++)
+	int **arr = new int*[m];
+	for (int i = 0; i < m; i++)
 	{
-		arr[i] = rand() % 10000;
-		arr[i] /= 100;
+		arr[i] = new int[n] {};
 	}
+	return arr;
 }
-
-void FillRand(int arr[ROWS][COLS], const int ROWS, const int COLS)
+template <typename T>
+void clear(T** arr, const T m)
 {
-	for (int i = 0; i < ROWS; i++)
+	for (int i = 0; i < m; i++)
 	{
-		for (int j = 0; j < COLS; j++)
+		delete[] arr[i];
+	}
+	delete[] arr;
+}
+void FillRand(int**arr, const int m, const int n)
+{
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
 		{
 			arr[i][j] = rand() % 100;
 		}
-	}
-}
-
-void FillRand(float arr[], const int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		arr[i] = rand() % 100;
-		arr[i] /= 10000000;
-	}
-}
-void FillRand(char arr[], const int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		arr[i] = rand() % 127;
 	}
 }
 void Print(int arr[], const int n)
@@ -121,187 +156,232 @@ void Print(int arr[], const int n)
 	}
 	cout << endl;
 }
-void Print(double arr[], const int n)
+void Print(int**arr, const int m, const int n)
 {
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < m; i++)
 	{
-		cout << arr[i] << "\t";
-	}
-	cout << endl;
-}
-void Print(float arr[], const int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		cout << arr[i] << "\t";
-	}
-	cout << endl;
-}
-void Print(char arr[], const int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		cout << arr[i] << "\t";
-	}
-	cout << endl;
-}
-
-void Print(int arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	for (int i = 0; i < ROWS; i++)
-	{
-		for (int j = 0; j < COLS; j++)
+		for (int j = 0; j < n; j++)
 		{
 			cout << arr[i][j] << "\t";
 		}
 		cout << endl;
 	}
+	cout << endl;
 }
-
-void Sort(int arr[], const int n)
+int* push_back(int arr[], int &n, int value)
 {
+	int*buffer = new int[n + 1]{};
 	for (int i = 0; i < n; i++)
 	{
-		for (int j = i + 1; j < n; j++)
-		{
-			if (arr[j] < arr[i])
-			{
-				int buffer = arr[i];
-				arr[i] = arr[j];
-				arr[j] = buffer;
-			}
-		}
+		buffer[i] = arr[i];
 	}
+	delete[]arr;
+	arr = buffer;
+	arr[n] = value;
+	n++;
+	return arr;
 }
-
-void Sort(int arr[ROWS][COLS], const int ROWS, const int COLS)
+int* push_front(int arr[], int &n, int value)
 {
-	int iterations = 0;
-	for (int i = 0; i < ROWS; i++)
+	int*buffer = new int[n + 1];
+	for (int i = 0; i < n + 1; i++)	buffer[i] = arr[i - 1];
+	delete[]arr;
+	arr = buffer;
+	arr[0] = value;
+	n++;
+	return arr;
+}
+int **push_row_back(int **arr, int &m, const int n)
+{
+	/*int** buf = new int*[m + 1]{};
+	for (int i = 0; i < m; i++)
 	{
-		for (int j = 0; j < COLS; j++)
-		{
-			for (int k = i; k < ROWS; k++)
-			{
-				for (int l = k == i ? j + 1 : 0.9; l < COLS; l++)
-				{
-					if (arr[k][l] < arr[i][j])
-					{
-						int buffer = arr[i][j];
-						arr[i][j] = arr[k][l];
-						arr[k][l] = buffer;
-					}
-					iterations++;
-				}
-			}
-		}
+	buf[i] = new int[n] {};
 	}
-	cout << endl << "Итераций: " << iterations << endl;
+	for (int i = 0; i < m; i++)
+	{
+	for (int j = 0; j < n; j++)
+	{
+	buf[i][j] = arr[i][j];
+	}
+	}
+	for (int i = 0; i < m; i++)
+	{
+	delete[] arr[i];
+	}
+	delete[] arr;
+	arr = buf;
+	arr[m] = new int [n] {};
+	m++;
+	return arr;*/
+	// создаем буферный массив
+	int** buffer = new int*[m + 1];
+	// копируем
+	for (int i = 0; i < m; i++) buffer[i] = arr[i];
+	delete[]arr;
+	arr = buffer;
+	arr[m] = new int[n] {};
+	m++;
+	return arr;
 }
-//void Sort(int arr[ROWS][COLS], const int ROWS, const int COLS)
-//{
-//	int iterations = 0;
-//	for (int i = 0; i < ROWS; i++)
-//	{
-//		for (int j = 0; j < COLS; j++)
-//		{
-//			for (int k = i; k < ROWS; k++)
-//			{
-//				for (int l = k == i ? j + 1 : 0; l < COLS; l++)
-//				{
-//					if (arr[k][l] < arr[i][j])
-//					{
-//						int buffer = arr[i][j];
-//						arr[i][j] = arr[k][l];
-//						arr[k][l] = buffer;
-//					}
-//					iterations++;
-//				}
-//			}
-//		}
-//	}
-//	cout << endl << "Итераций: " << iterations << endl;
-//}
-int Sum(int arr[], const int n)
+void push_col_back(int **arr, int const m, int &n)
 {
-	int sum = 0;
+	for (int i = 0; i < m; i++)
+	{
+		int* buffer = new int[n + 1]{};
+		for (int j = 0; j < n; j++)
+		{
+			buffer[j] = arr[i][j];
+		}
+		delete[]arr[i];
+		arr[i] = buffer;
+	}
+	n++;
+}
+int **push_row_front(int **arr, int &m, const int n)
+{
+	int** buffer = new int*[m + 1];
+	for (int i = 0; i < m; i++)buffer[i + 1] = arr[i];
+	delete[] arr;
+	arr = buffer;
+	arr[0] = new int [n] {};
+	m++;
+	return arr;
+}
+void push_col_front(int **arr, int const m, int &n)
+{
+	for (int i = 0; i < m; i++)
+	{
+		int* buffer = new int[n + 1]{};
+		for (int j = 0; j < n; j++)
+		{
+			buffer[j + 1] = arr[i][j];
+		}
+		delete[]arr[i];
+		arr[i] = buffer;
+	}
+	n++;
+}
+int **pop_row_back(int **arr, int &m, const int n)
+{
+	int** buffer = new int*[--m];
+	for (int i = 0; i < m; i++) buffer[i] = arr[i];
+	delete[]arr;
+	arr = buffer;
+	return arr;
+}
+void pop_col_back(int **arr, int const m, int &n)
+{
+	for (int i = 0; i < m; i++)
+	{
+		int* buffer = new int[n] {};
+		for (int j = 0; j < n; j++)
+		{
+			buffer[j] = arr[i][j];
+		}
+		delete[]arr[i];
+		arr[i] = buffer;
+	}
+	n--;
+}
+int **pop_row_front(int **arr, int &m, const int n)
+{
+	int** buffer = new int*[--m];
+	for (int i = 0; i < m; i++)buffer[i] = arr[i + 1];
+	delete[] arr;
+	arr = buffer;
+	return arr;
+}
+void pop_col_front(int **arr, int const m, int &n)
+{
+	for (int i = 0; i < m; i++)
+	{
+		int* buffer = new int[n] {};
+		for (int j = 0; j < n; j++)
+		{
+			buffer[j] = arr[i][j + 1];
+		}
+		delete[]arr[i];
+		arr[i] = buffer;
+	}
+	n--;
+}
+int **insert_row(int **arr, int &m, const int n, int index)
+{
+	if (index > m)return arr;
+	int**buffer = new int*[m + 1]{};
+	for (int i = 0; i < m + 1; i++)
+	{
+		i < index ? buffer[i] = arr[i] : buffer[i + 1] = arr[i];
+	}
+	delete[]arr;
+	arr = buffer;
+	arr[index] = new int [n] {};
+	m++;
+	return arr;
+}
+int **erase_row(int **arr, int &m, const int n, int index)
+{
+	if (index > m)return arr;
+	int**buffer = new int*[m - 1];
+	for (int i = 0; i < m - 1; i++)
+	{
+		i < index ? buffer[i] = arr[i] : buffer[i] = arr[i + 1];
+	}
+	delete[]arr;
+	arr = buffer;
+	m--;
+	return arr;
+}
+int* insert(int arr[], int &n, int value, int index)
+{
+	if (index > n)return arr;
+	int*buffer = new int[n + 1];
+	for (int i = 0; i < index; i++)
+	{
+		buffer[i] = arr[i];
+	}
+	for (int i = index; i < n; i++)
+	{
+		buffer[i + 1] = arr[i];
+	}
+	arr = buffer;
+	arr[index] = value;
+	n++;
+	return arr;
+}
+int* pop_front(int arr[], int &n)
+{
+	int*buffer = new int[n - 1];
+	for (int i = 0; i < n - 1; i++)
+	{
+		buffer[i] = arr[i + 1];
+	}
+	delete[]arr;
+	arr = buffer;
+	n--;
+	return arr;
+}
+int* pop_back(int arr[], int &n)
+{
+	int*buffer = new int[--n];
 	for (int i = 0; i < n; i++)
 	{
-		sum += arr[i];
+		buffer[i] = arr[i];
 	}
-	return sum;
+	delete[]arr;
+	return buffer;
 }
-int Sum(int arr[ROWS][COLS], const int ROWS, const int COLS)
+int*erase(int arr[], int &n, int index)
 {
-	int sum = 0;
-	for (int i = 0; i < ROWS; i++)
+	if (index > n)return arr;
+	int*buffer = new int[n - 1];
+	for (int i = 0; i < index; i++)
 	{
-		for (int j = 0; j < COLS; j++)
-		{
-			sum += arr[i][j];
-		}
+		buffer[i] = arr[i];
 	}
-	return sum;
-}
-double Avg(int arr[], const int n)
-{
-	return (double)Sum(arr, n) / n;
-}
-double Avg(int arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	return (double)Sum(arr, ROWS, COLS) / (ROWS*COLS);
-}
-int minValueIn(int arr[], const int n)
-{
-	int min = arr[0];
-	for (int i = 0; i < n; i++)
+	for (int i = index - 1; i < n; i++)
 	{
-		if (min > arr[i])
-		{
-			min = arr[i];
-		}
-	}
-	return min;
-}
-int minValueIn(int arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	int min = arr[0][0];
-	for (int i = 0; i < ROWS; i++)
-	{
-		for (int j = 0; j < COLS; j++)
-		{
-			if (min > arr[i][j])
-			{
-				min = arr[i][j];
-			}
-		}
-	}
-	return min;
-}
-int maxValueIn(int arr[], const int n)
-{
-	int max = arr[0];
-	for (int i = 0; i < n; i++)
-	{
-		if (max < arr[i])
-		{
-			max = arr[i];
-		}
-	}
-	return max;
-}
-int maxValueIn(int arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	int max = arr[0][0];
-	for (int i = 0; i < ROWS; i++)
-	{
-		for (int j = 0; j < COLS; j++)
-		{
-			if (max < arr[i][j])
-			{
-				max = arr[i][j];
-			}
-		}
-	}
-	return max;
+		buffer[i] = arr[i + 1];
+	}arr = buffer; n--; return arr;
 }
