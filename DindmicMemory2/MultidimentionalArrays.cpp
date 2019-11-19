@@ -131,3 +131,42 @@ T **erase_row(T **arr, int &m, const int n, int index)
 	m--;
 	return arr;
 }
+template<typename T>
+void insert_col(T** arr, const int m, int& n, int index)
+{
+	for (int i = 0; i < m; i++)
+	{
+		T* buf = new T[n + 1]{};
+		for (int j = 0; j < index; j++)
+		{
+			buf[j] = arr[i][j];
+		}
+		for (int j = index; j < n + 1; j++)
+		{
+			buf[j + 1] = arr[i][j];
+		}
+		delete[] arr[i];
+		arr[i] = buf;
+	}
+	n++;
+}
+template<typename T>
+void erase_col(T** arr, const int m, int& n, int index)
+{
+	for (int i = 0; i < m; i++)
+	{
+		T* buf = new T[n - 1]{};
+		for (int j = 0; j < index; j++)
+		{
+			buf[j] = arr[i][j];
+		}
+		for (int j = index; j < n; j++)
+		{
+			buf[j] = arr[i][j + 1];
+		}
+		delete[] arr[i];
+		arr[i] = buf;
+	}
+	n--;
+}
+

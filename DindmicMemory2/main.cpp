@@ -6,7 +6,7 @@
 //#define DINAMIC_MEMORY_1
 #define DINAMIC_MEMORY_2
 #define ROWS
-//#define COLS
+#define COLS
 
 typedef int DataType;
 void main()
@@ -82,13 +82,13 @@ void main()
 	Print(arr, m, n);
 	pop_col_front(arr, m, n);
 	Print(arr, m, n);
-	/*cout << "В какую строку Вы хотите вставить новую? "; int index;
+	cout << "В какую строку Вы хотите вставить новую? ";
 	cin >> index; cout << endl;
-arr = insert_col (arr, m, n, index);
+insert_col (arr, m, n, index);
 	Print(arr, m, n);
 	cout << "Какую строку Вы хотите удалить? ";
 	cin >> index; cout << endl;
-arr = erase_col(arr, m, n, index);*/
+erase_col(arr, m, n, index);
 	Print(arr, m, n);
 #endif // COLS
 	// удаление двумерного динамического массива
