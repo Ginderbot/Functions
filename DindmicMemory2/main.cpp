@@ -29,6 +29,9 @@ int* insert(int arr[], int &n, int value, int index);
 int* pop_front(int arr[], int &n);
 int* pop_back(int arr[], int &n);
 int* erase(int arr[], int &n, int index);
+void insert_col(int** arr, const int m, int& n, int index);
+void erase_col(int** arr, const int m, int& n, int index);
+
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -43,15 +46,15 @@ void main()
 	cout << endl;
 	int value, chouse;
 	
-	//cout << "Введите добавляемое значение: "; cin >> value;
-	// arr = push_front(arr, n, value);
+	cout << "Введите добавляемое значение: "; cin >> value;
+	arr = push_front(arr, n, value);
 	Print(arr, n);
-	// arr = push_back(arr, n, value);
+	arr = push_back(arr, n, value);
 	Print(arr, n);
 	int index;
 	cout << "Введите количество отступа: "; cin >> index;
-	// cout << endl;
-	// arr = insert(arr, n, value, index);
+	cout << endl;
+	arr = insert(arr, n, value, index);
 	Print(arr, n);
 	arr = pop_front(arr, n);
 	Print(arr, n);
@@ -68,8 +71,6 @@ void main()
 	cout << "Введите количество улументов строки: "; cin >> n;
 	// обьявление динамического массива
 	int **arr = allocate(m, n);
-	cout << "memory allocated" << endl;
-	cout << "Filling array" << endl;
 	///////////////////////////////////////////////////////
 	// использование двумерного динамического массива
 	FillRand(arr, m, n);
@@ -87,7 +88,6 @@ void main()
 	cin >> index; cout << endl;
 	insert_row(arr, m, n, index);
 	Print(arr, m, n);
-	cout << "Row addet" << endl;
 	cout << "Какую строку Вы хотите удалить? ";
 	cin >> index; cout << endl;
 	erase_row(arr, m, n, index);
@@ -100,6 +100,13 @@ void main()
 	Print(arr, m, n);
 	pop_col_front(arr, m, n);
 	Print(arr, m, n);
+	cout << "В какую строку Вы хотите вставить новую? ";
+	cin >> index; cout << endl;
+	insert_col(arr, m, n, index);
+	Print(arr, m, n);
+	cout << "Какую строку Вы хотите удалить? ";
+	cin >> index; cout << endl;
+	erase_col(arr, m, n, index);
 	//////////////////////////////////////////////////////
 	// удаление двумерного динамического массива
 	clear(arr, m);
@@ -345,3 +352,42 @@ int*erase(int arr[], int &n, int index)
 		buffer[i] = arr[i + 1];
 	}arr = buffer; n--; return arr;
 }
+void insert_col(int** arr, const int m, int& n, int index)
+{
+	for (int i = 0; i < m; i++)
+	{
+		int* buf = new int[n + 1]{};
+		for (int j = 0; j < index; j++)
+		{
+			buf[j] = arr[i][j];
+		}
+
+		for (int j = index; j < n + 1; j++)
+		{
+			buf[j + 1] = arr[i][j];
+		}
+		delete[] arr[i];
+		arr[i] = buf;
+	}
+	n++;
+}
+
+void erase_col(int** arr, const int m, int& n, int index)
+{
+	for (int i = 0; i < m; i++)
+	{
+		int* buf = new int[n - 1]{};
+		for (int j = 0; j < index; j++)
+		{
+			buf[j] = arr[i][j];
+		}
+		for (int j = index; j < n; j++)
+		{
+			buf[j] = arr[i][j + 1];
+		}
+		delete[] arr[i];
+		arr[i] = buf;
+	}
+	n--;
+}
+
