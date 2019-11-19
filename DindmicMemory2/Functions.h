@@ -4,10 +4,6 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-
-
-
-
 template<typename T>T ** allocate(const int m, const int n);
 template<typename T>void clear(T** arr, const int n);
 template<typename T>void FillRand(T**arr, const int n, const int m);
@@ -22,7 +18,7 @@ template<typename T>T* insert(T arr[], int &n, T value, int index);
 template<typename T>T **push_row_back(T **arr, int &m, const int n);
 template<typename T>T **push_row_front(T **arr, int &m, const int n);
 
-template<typename T> void push_col_back(T **arr, int const m, int &n);
+template<typename T>void push_col_back(T **arr, int const m, int &n);
 template<typename T>void push_col_front(T **arr, int const m, int &n);
 template<typename T>T **pop_row_back(T **arr, int &m, const int n);
 template<typename T>void pop_col_back(T **arr, int const m, int &n);

@@ -6,7 +6,7 @@
 //#define DINAMIC_MEMORY_1
 #define DINAMIC_MEMORY_2
 #define ROWS
-#define COLS
+//#define COLS
 
 typedef int DataType;
 void main()
