@@ -371,7 +371,6 @@ void insert_col(int** arr, const int m, int& n, int index)
 	}
 	n++;
 }
-
 void erase_col(int** arr, const int m, int& n, int index)
 {
 	for (int i = 0; i < m; i++)
