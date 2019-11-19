@@ -3,27 +3,6 @@
 template<typename T>
 T **push_row_back(T **arr, int &m, const int n)
 {
-	/*int** buf = new int*[m + 1]{};
-	for (int i = 0; i < m; i++)
-	{
-	buf[i] = new int[n] {};
-	}
-	for (int i = 0; i < m; i++)
-	{
-	for (int j = 0; j < n; j++)
-	{
-	buf[i][j] = arr[i][j];
-	}
-	}
-	for (int i = 0; i < m; i++)
-	{
-	delete[] arr[i];
-	}
-	delete[] arr;
-	arr = buf;
-	arr[m] = new int [n] {};
-	m++;
-	return arr;*/
 	// создаем буферный массив
 	T** buffer = new T*[m + 1];
 	// копируем

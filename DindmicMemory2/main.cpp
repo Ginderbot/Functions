@@ -5,7 +5,7 @@
 #include"MultidimentionalArrays.cpp"
 //#define DINAMIC_MEMORY_1
 #define DINAMIC_MEMORY_2
-//#define ROWS
+#define ROWS
 #define COLS
 
 typedef int DataType;
@@ -21,29 +21,18 @@ void main()
 		cout << (arr[i] = rand() % 100) << "\t";
 	}
 	cout << endl;
-	int value, chouse;
-	cout << "1. Добавить значение в начале массива " << endl << "2. Добавить значение в конце массива " << "3. Добавить значение в середину массива" << endl;
-	cin >> chouse;
+	int value;
 	cout << "Введите добавляемое значение: "; cin >> value;
-	if (chouse == 1)
-	{
 	 arr = push_front(arr, n, value);
-	}
-	else if (chouse == 2)
-	{
+	 Print(arr, n);
 	 arr = push_back(arr, n, value);
-	}
-	else if (chouse == 3)
-	{
+	 Print(arr, n);
 	int index;
 	cout << "Введите количество отступа: "; cin >> index;
 	 cout << endl;
 	 arr = insert(arr, n, value, index);
-	}
-	else
-	{
-	 cout << "Недопустимый выбор" << endl;
-	}
+	 Print(arr, n);
+	 cout << "Введите удаляемое значение: "; cin >> index;
 	arr = pop_front(arr, n);
 	Print(arr, n);
 	arr = pop_back(arr, n);
@@ -74,7 +63,7 @@ void main()
 	Print(arr, m, n);
 	arr = pop_row_front(arr, m, n);
 	Print(arr, m, n);
-	/*cout << "В какую строку Вы хотите вставить новую? "; int index;
+	cout << "В какую строку Вы хотите вставить новую? "; int index;
 	cin >> index; cout << endl;
 	arr = insert_row(arr, m, n, index);
 	Print(arr, m, n);
@@ -82,7 +71,7 @@ void main()
 	cout << "Какую строку Вы хотите удалить? ";
 	cin >> index; cout << endl;
 	arr = erase_row(arr, m, n, index);
-	Print(arr, m, n);*/
+	Print(arr, m, n);
 #endif // ROWS
 #ifdef COLS
 	push_col_back(arr, m, n);
@@ -92,6 +81,14 @@ void main()
 	pop_col_back(arr, m, n);
 	Print(arr, m, n);
 	pop_col_front(arr, m, n);
+	Print(arr, m, n);
+	/*cout << "В какую строку Вы хотите вставить новую? "; int index;
+	cin >> index; cout << endl;
+arr = insert_col (arr, m, n, index);
+	Print(arr, m, n);
+	cout << "Какую строку Вы хотите удалить? ";
+	cin >> index; cout << endl;
+arr = erase_col(arr, m, n, index);*/
 	Print(arr, m, n);
 #endif // COLS
 	// удаление двумерного динамического массива
