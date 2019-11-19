@@ -31,8 +31,10 @@ template<typename T>void pop_col_front(T **arr, int const m, int &n);
 template<typename T>T **insert_row(T **arr, int &m, const int n, int index);
 template<typename T>T **erase_row(T **arr, int &m, const int n, int index);
 template<typename T>T* pop_front(T arr[], int &n);
-template<typename T>T* pop_back(int arr[], int &n);
+template<typename T>T* pop_back(T arr[], int &n);
 template<typename T>T* erase(T arr[], int &n, int index);
+template<typename T>void erase_col(T** arr, const int m, int& n, int index);
+template<typename T>void insert_col(T** arr, const int m, int& n, int index);
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -409,4 +411,42 @@ T*erase(T arr[], int &n, int index)
 	arr = buffer;
 	n--;
 	return arr;
+}
+template<typename T>
+void insert_col(T** arr, const int m, int& n, int index)
+{
+	for (int i = 0; i < m; i++)
+	{
+		T* buf = new T[n + 1]{};
+		for (int j = 0; j < index; j++)
+		{
+			buf[j] = arr[i][j];
+		}
+		for (int j = index; j < n + 1; j++)
+		{
+			buf[j + 1] = arr[i][j];
+		}
+		delete[] arr[i];
+		arr[i] = buf;
+	}
+	n++;
+}
+template<typename T>
+void erase_col(T** arr, const int m, int& n, int index)
+{
+	for (int i = 0; i < m; i++)
+	{
+		T* buf = new T[n - 1]{};
+		for (int j = 0; j < index; j++)
+		{
+			buf[j] = arr[i][j];
+		}
+		for (int j = index; j < n; j++)
+		{
+			buf[j] = arr[i][j + 1];
+		}
+		delete[] arr[i];
+		arr[i] = buf;
+	}
+	n--;
 }
